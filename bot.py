@@ -38,14 +38,14 @@ class Bot(commands.Bot):
     async def red(self, ctx):
         if vote_flag:
             self.red_score += 1
-            self.obs.add_score('red')
+            self.obs.display_score('red',self.red_score)
             pass
 
     @commands.command(name='blue')
     async def blue(self, ctx):
         if vote_flag:
             self.blue_score += 1
-            self.obs.add_score('blue')
+            self.obs.display_score('blue',self.blue_score)
             pass
     
     @commands.comand(name='ready')
