@@ -1,6 +1,6 @@
 from obswebsocket import obsws
 import obswebsocket.requests as obsRequests
-from setting import Setting
+from config import Config
 
 class OBS(obsws):
 
@@ -16,9 +16,9 @@ class OBS(obsws):
         # blue_score_source = self.call(obsRequests.テキストのソース)
 
     # teamに得点を追加、描画
-    def addScore(team) -> None:
+    def add_score(team) -> None:
         pass
 
     # 試合終了後の両チームScoreリセット
-    def resetScore() -> None:
+    def reset_score() -> None:
         pass
