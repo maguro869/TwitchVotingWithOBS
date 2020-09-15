@@ -12,18 +12,44 @@ class OBS(obsws):
         super.__init__(host, port, password)
         self.connect()
         
-        red_score_source = self.call(
+        self.red_score_source = self.call(
             obsRequests.GetSourceSettings(
                 RED_SCORE_SOURCE_NAME))
+        
+        self.red_score_settings = red_score_source.getSourcesettings()
 
-        blue_score_source =self.call(
+        self.blue_score_source =self.call(
             obsRequests.GetSourceSettings(
                 BLUE_SCORE_SOURCE_NAME))
 
+        self.blue_score_settings = blue_score_source.getSourcesettings()
+
     # teamに得点を追加、描画
-    def add_score(self,mteam) -> None:
-        pass
+    def display_score(self,team,score) -> None:
+        if team == 'red':
+            self.red_score_settings['text'] = str(score)
+            self.call(
+                obsRequests.SetSourceSettings(
+                    RED_SCORE_SOURCE_NAME,
+                    sourceSettings=self.red_score_settings))
+
+        if team == 'blue':
+            self.blue_score_settings['text'] = str(score)
+            self.call(
+                obsRequests.SetSourceSettings(
+                    BLUE_SCORE_SOURCE_NAME,
+                    sourceSettings=self.blue_score_settings))
+        
 
     # 試合終了後の両チームScoreリセット
     def reset_score(self) -> None:
-        pass
+        self.red_score_settings['text'] = '0'
+        self.blue_score_settings['text'] = '0'
+        self.call(
+             obsRequests.SetSourceSettings(
+                RED_SCORE_SOURCE_NAME,
+                sourceSettings=self.red_score_settings))
+        self.call(
+            obsRequests.SetSourceSettings(
+                BLUE_SCORE_SOURCE_NAME,
+                sourceSettings=self.blue_score_settings))
