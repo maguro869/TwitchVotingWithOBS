@@ -12,13 +12,18 @@ class OBS(obsws):
         super.__init__(host, port, password)
         self.connect()
         
-        # red_score_source = self.call(obsRequests.テキストのソース)
-        # blue_score_source = self.call(obsRequests.テキストのソース)
+        red_score_source = self.call(
+            obsRequests.GetSourceSettings(
+                RED_SCORE_SOURCE_NAME))
+
+        blue_score_source =self.call(
+            obsRequests.GetSourceSettings(
+                BLUE_SCORE_SOURCE_NAME))
 
     # teamに得点を追加、描画
-    def add_score(team) -> None:
+    def add_score(self,mteam) -> None:
         pass
 
     # 試合終了後の両チームScoreリセット
-    def reset_score() -> None:
+    def reset_score(self) -> None:
         pass
