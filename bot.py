@@ -4,13 +4,13 @@ from config import Config
 
 class Bot(commands.Bot):
 
-    def __init__(self,obs:obsws):
+    def __init__(self,token,client_id,bot_nick,bot_prefix,channel,obs:obsws):
         super().__init__(
-            irc_token='...', 
-            client_id='...', 
-            nick='...', 
-            prefix='/',
-            initial_channels=['...'],
+            irc_token=token,
+            client_id=client_id,
+            nick=bot_nick,
+            prefix=bot_prefix,
+            initial_channels=channel,
             )
 
         # 引数で受け取るobsの操作を行う為のオブジェクト
