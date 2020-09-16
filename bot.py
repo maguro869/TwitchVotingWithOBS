@@ -1,6 +1,6 @@
 from twitchio.ext import commands
 from obswebsocket import obsws
-from config import Config
+from config import MASTER_ID
 
 class Bot(commands.Bot):
 
@@ -23,6 +23,7 @@ class Bot(commands.Bot):
         self.blue_score = 0
 
     def initalize(self) -> None:
+        print('initalize')
         self.red_score = 0
         self.blue_score = 0
         self.obs.reset_score()
@@ -36,27 +37,37 @@ class Bot(commands.Bot):
 
     @commands.command(name='red')
     async def red(self, ctx):
-        if vote_flag:
+        print('red')
+        if self.vote_flag:
+            print(f'red_score:{self.red_score}')
             self.red_score += 1
             self.obs.display_score('red',self.red_score)
-            pass
+            
 
     @commands.command(name='blue')
     async def blue(self, ctx):
-        if vote_flag:
+        print('blue')
+        if self.vote_flag:
             self.blue_score += 1
             self.obs.display_score('blue',self.blue_score)
-            pass
+            
     
-    @commands.comand(name='ready')
+    @commands.command(name='ready')
     async def ready(self, ctx):
-        if ctx.author.id == Config.MASTER_ID:
-            vote_flag = True
+        print('ready')
+        print(f'ctx.author.name {ctx.author.name}')
+        if ctx.author.name == MASTER_ID:
+            self.vote_flag = True
             self.initalize()
     
     @commands.command(name='timeup')
     async def timeup(self, ctx):
-        if ctx.author.id == Config.MASTER_ID:
+        print('timeup')
+        if ctx.author.name == MASTER_ID:
             vote_flag = False
             self.result_match()
     
+    @commands.command(name='dc')
+    async def dc(self, ctx):
+        if ctx.author.name == MASTER_ID:
+            self.obs.disconnect()

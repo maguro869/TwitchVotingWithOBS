@@ -1,43 +1,49 @@
 from obswebsocket import obsws
 import obswebsocket.requests as obsRequests
-from config import Config
 
 class OBS(obsws):
 
-    RED_SCORE_SOURCE_NAME = 'RED_SCORE'
-    BLUE_SCORE_SOURCE_NAME = 'BLUE_SCORE'
+    
 
     def __init__(self,host,port,password):
 
-        super.__init__(host, port, password)
+        super().__init__(host, port, password)
         self.connect()
         
+        self.RED_SCORE_SOURCE_NAME = 'RED_SCORE'
+        self.BLUE_SCORE_SOURCE_NAME = 'BLUE_SCORE'
+
         self.red_score_source = self.call(
             obsRequests.GetSourceSettings(
-                RED_SCORE_SOURCE_NAME))
+                self.RED_SCORE_SOURCE_NAME))
         
-        self.red_score_settings = red_score_source.getSourcesettings()
+        self.red_score_settings = self.red_score_source.getSourcesettings()
+        print(f'red_score_settings[text]:{self.red_score_settings["text"]}')
 
         self.blue_score_source =self.call(
             obsRequests.GetSourceSettings(
-                BLUE_SCORE_SOURCE_NAME))
+                self.BLUE_SCORE_SOURCE_NAME))
 
-        self.blue_score_settings = blue_score_source.getSourcesettings()
+        self.blue_score_settings = self.blue_score_source.getSourcesettings()
+        print(f'blue_score_settings[text]:{self.blue_score_settings["text"]}')
 
     # teamに得点を追加、描画
     def display_score(self,team,score) -> None:
+        print('obs.display_score')
         if team == 'red':
+            print('obs.display_score.red')
             self.red_score_settings['text'] = str(score)
             self.call(
                 obsRequests.SetSourceSettings(
-                    RED_SCORE_SOURCE_NAME,
+                    self.RED_SCORE_SOURCE_NAME,
                     sourceSettings=self.red_score_settings))
 
         if team == 'blue':
+            print('obs.display_score.blue')
             self.blue_score_settings['text'] = str(score)
             self.call(
                 obsRequests.SetSourceSettings(
-                    BLUE_SCORE_SOURCE_NAME,
+                    self.BLUE_SCORE_SOURCE_NAME,
                     sourceSettings=self.blue_score_settings))
         
 
@@ -46,10 +52,10 @@ class OBS(obsws):
         self.red_score_settings['text'] = '0'
         self.blue_score_settings['text'] = '0'
         self.call(
-             obsRequests.SetSourceSettings(
-                RED_SCORE_SOURCE_NAME,
+            obsRequests.SetSourceSettings(
+                self.RED_SCORE_SOURCE_NAME,
                 sourceSettings=self.red_score_settings))
         self.call(
             obsRequests.SetSourceSettings(
-                BLUE_SCORE_SOURCE_NAME,
+                self.BLUE_SCORE_SOURCE_NAME,
                 sourceSettings=self.blue_score_settings))
