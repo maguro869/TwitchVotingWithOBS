@@ -1,7 +1,7 @@
 # TwitchVotingWithOBS
 Twitchコメントによる投票機能 for DJxDJ
 
-# Usage
+# Usage🐰
 ## 1. 環境作成
 ### pythonの準備
 - このリポジトリをclone
