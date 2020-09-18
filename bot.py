@@ -22,13 +22,13 @@ class Bot(commands.Bot):
         self.red_score = 0
         self.blue_score = 0
 
-    def initalize(self) -> None:
+    async def initalize(self) -> None:
         print('initalize')
         self.red_score = 0
         self.blue_score = 0
         self.obs.reset_score()
 
-    def result_match(self):
+    async def result_match(self):
         self.red_score_list.append(self.red_score)
         self.blue_score_list.append(self.blue_score)
 
@@ -58,16 +58,17 @@ class Bot(commands.Bot):
         print(f'ctx.author.name {ctx.author.name}')
         if ctx.author.name == MASTER_ID:
             self.vote_flag = True
-            self.initalize()
+            await self.initalize()
     
     @commands.command(name='timeup')
     async def timeup(self, ctx):
         print('timeup')
         if ctx.author.name == MASTER_ID:
             vote_flag = False
-            self.result_match()
+            await self.result_match()
     
     @commands.command(name='dc')
     async def dc(self, ctx):
         if ctx.author.name == MASTER_ID:
             self.obs.disconnect()
+            self.disconnest()
