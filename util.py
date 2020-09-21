@@ -31,7 +31,7 @@ class Util():
             for team in phase.values():
                 for fighter in team.values():
                     if fighter['name'] == name:
-                        return fighter['phase']
+                        return int(fighter['phase'])
 
     def close(self):
         self.fighter_file.close()
