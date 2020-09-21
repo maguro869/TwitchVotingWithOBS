@@ -1,6 +1,8 @@
 from twitchio.ext import commands
 from obswebsocket import obsws
+import util
 from config import MASTER_ID
+
 
 class Bot(commands.Bot):
 
@@ -21,6 +23,7 @@ class Bot(commands.Bot):
         self.blue_scpre_list = []
         self.red_score = 0
         self.blue_score = 0
+        self.phase = 1
 
     async def initalize(self) -> None:
         print('initalize')
@@ -66,6 +69,9 @@ class Bot(commands.Bot):
         if ctx.author.name == MASTER_ID:
             vote_flag = False
             await self.result_match()
+            util.save_score(self.red_score,)
+            self.phase += 1
+
     
     @commands.command(name='dc')
     async def dc(self, ctx):
