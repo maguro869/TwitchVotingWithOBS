@@ -1,12 +1,19 @@
 import json
 import csv
 
-class Util():
+class Util:
+
+    __fighter_file = open('data/fighter.json')
+    __fighter_json = json.load(__fighter_file)
+    __score_file = open('data/score.csv', mode='a',encoding='utf8')
 
     def __init__(self):
-        self.fighter_file = open('data/fighter.json')
-        self.fighter_info = json.load(self.fighter_file)
-        self.score_file = open('data/score.csv', mode='a',encoding='utf8')
+        
+        self.fighter_list = []
+        for phase in self.__fighter_json.values():
+            for team in phase.values():
+                for fighter in team.values():
+                    self.fighter_list.append(fighter)
     
 
 
@@ -20,22 +27,18 @@ class Util():
         return self.fighter_info['phase'][str(phase)][team]['name']
 
     def get_team(self,name):
-        for phase in self.fighter_info.values():
-            for team in phase.values():
-                for fighter in team.values():
-                    if fighter['name'] == name:
-                        return fighter['team']
+        for fighter in self.fighter_list:
+            if fighter['name'] == name:
+                return fighter['team']
 
     def get_phase(self,name):
-        for phase in self.fighter_info.values():
-            for team in phase.values():
-                for fighter in team.values():
-                    if fighter['name'] == name:
-                        return int(fighter['phase'])
+        for fighter in self.fighter_list:
+            if fighter['name'] == name:
+                return fighter['phase']
 
     def close(self):
-        self.fighter_file.close()
-        self.score_file.close()
+        __fighter_file.close()
+        __score_file.close()
 
 
     def make_score_format(self,phase,team,score):
