@@ -1,0 +1,29 @@
+{
+    "phase": {
+        "1": {
+            "red": {
+                "name": "maguro",
+                "team": "red",
+                "phase": 1
+            },
+            "blue": {
+                "name": "nemo",
+                "team": "blue",
+                "phase": 1
+            }
+
+        },
+        "2": {
+            "red": {
+                "name": "oosaki",
+                "team": "red",
+                "phase": 2
+            },
+            "blue": {
+                "name": "nukome",
+                "team": "blue",
+                "phase": 2
+            }
+        }
+    }
+}
