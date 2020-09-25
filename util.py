@@ -17,7 +17,9 @@ class Util:
                     self.fighter_list.append(fighter)
     
     def get_total_score(self):
-        reader = csv.reader(self.__score_file)
+        read_file = open('data/score.csv',encoding='utf8')
+
+        reader = csv.reader(read_file)
         red_score = 0
         blue_score = 0
 
@@ -26,7 +28,7 @@ class Util:
                 red_score += info[3]
             elif info[1] == 'blue':
                 blue_score += info[3]
-
+        read_file.close()
         return [red_score,blue_score]
 
     def save_score(self,phase,red_score,blue_score):
@@ -63,3 +65,5 @@ class Util:
 
     def make_score_format(self,phase,team,score):
         return [phase,team,get_fighter_name(phase,team),score]
+
+    
