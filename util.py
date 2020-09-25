@@ -6,6 +6,7 @@ class Util:
     __fighter_file = open('data/fighter.json')
     __fighter_json = json.load(__fighter_file)
     __score_file = open('data/score.csv', mode='a',encoding='utf8')
+    __writer = csv.writer(self.score_file)
 
     def __init__(self):
         
@@ -17,11 +18,17 @@ class Util:
     
 
 
-    def save_score(self,red,blue):
-        writer = csv.writer(self.score_file)
-        writer.writerow(red.append('red'))
-        writer.writerow(blue.append('blue'))
-
+    def save_score(self,phase,red,blue):
+        red_info = get_fighter_info(phase,'red').append(red)
+        blue_info = get_fighter_info(phase,'blue').append(blue)
+        
+        self.__writer.writerow(red_info)
+        self.__writer.writerow(blue_info)
+    
+    def get_fighter_info(self,phase,team):
+        for fighter in self.fighter_list:
+            if fighter['phase'] == phase and fighter['team'] == team:
+                return fighter.values()
 
     def get_fighter_name(self,phase,team):
         return self.fighter_info['phase'][str(phase)][team]['name']
