@@ -69,7 +69,7 @@ class Bot(commands.Bot):
         if ctx.author.name == MASTER_ID:
             vote_flag = False
             await self.result_match()
-            util.save_score(self.red_score,self.blue_score)
+            util.save_score(self.phase,self.red_score,self.blue_score)
             self.phase += 1
 
     
