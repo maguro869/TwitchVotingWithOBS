@@ -29,9 +29,9 @@ class Util:
 
         return [red_score,blue_score]
 
-    def save_score(self,phase,red,blue):
-        red_info = get_fighter_info(phase,'red').append(red)
-        blue_info = get_fighter_info(phase,'blue').append(blue)
+    def save_score(self,phase,red_score,blue_score):
+        red_info = make_score_format(phase,'red',red_score)
+        blue_info = make_score_format(phase,'blue',blue_score)
         
         self.__writer.writerow(red_info)
         self.__writer.writerow(blue_info)
@@ -42,7 +42,9 @@ class Util:
                 return fighter.values()
 
     def get_fighter_name(self,phase,team):
-        return self.fighter_info['phase'][str(phase)][team]['name']
+        for fighter in self.fighter_list:
+            if fighter['phase'] == phase and fighter['team'] == team:
+                return fighter['name']
 
     def get_team(self,name):
         for fighter in self.fighter_list:
@@ -60,4 +62,4 @@ class Util:
 
 
     def make_score_format(self,phase,team,score):
-        return [phase,team,score,get_fighter_name(phase,team)]
+        return [phase,team,get_fighter_name(phase,team),score]
