@@ -27,7 +27,7 @@ class Util:
             elif info[1] == 'blue':
                 blue_score += info[3]
 
-        return red_score,blue_score 
+        return [red_score,blue_score]
 
     def save_score(self,phase,red,blue):
         red_info = get_fighter_info(phase,'red').append(red)
