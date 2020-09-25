@@ -1,6 +1,6 @@
 from twitchio.ext import commands
 from obswebsocket import obsws
-import util
+from util import Util
 from config import MASTER_ID
 
 
@@ -69,9 +69,17 @@ class Bot(commands.Bot):
         if ctx.author.name == MASTER_ID:
             vote_flag = False
             await self.result_match()
-            util.save_score(self.phase,self.red_score,self.blue_score)
+            Util.save_score(self.phase, self.red_score, self.blue_score)
             self.phase += 1
 
+    @commands.command(name='total'):
+    async def total(self, ctx):
+        print('total')
+        if ctx.author.name == MASTER_ID:
+            red_total_score, blue_total_score = Util.get_total_score()
+            self.obs.display_score('red',red_score)
+            self.obs.display_score('blue',blue_score)
+            
     
     @commands.command(name='dc')
     async def dc(self, ctx):
