@@ -6,7 +6,7 @@ class Util:
     __fighter_file = open('data/fighter.json')
     __fighter_json = json.load(__fighter_file)
     __score_file = open('data/score.csv', mode='a',encoding='utf8')
-    __writer = csv.writer(self.score_file)
+    __writer = csv.writer(self.__score_file)
 
     def __init__(self):
         
@@ -16,7 +16,18 @@ class Util:
                 for fighter in team.values():
                     self.fighter_list.append(fighter)
     
+    def get_total_score(self):
+        reader = csv.reader(self.__score_file)
+        red_score = 0
+        blue_score = 0
 
+        for info in reader:
+            if info[1] == 'red':
+                red_score += info[3]
+            elif info[1] == 'blue':
+                blue_score += info[3]
+
+        return red_score,blue_score 
 
     def save_score(self,phase,red,blue):
         red_info = get_fighter_info(phase,'red').append(red)
