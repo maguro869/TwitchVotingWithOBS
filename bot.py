@@ -24,6 +24,7 @@ class Bot(commands.Bot):
         self.red_score = 0
         self.blue_score = 0
         self.phase = 1
+        self.ADD_SCORE = 5
 
     async def initalize(self) -> None:
         print('initalize')
@@ -43,7 +44,7 @@ class Bot(commands.Bot):
         print('red')
         if self.vote_flag:
             print(f'red_score:{self.red_score}')
-            self.red_score += 1
+            self.red_score += self.ADD_SCORE
             self.obs.display_score('red',self.red_score)
             
 
@@ -51,7 +52,7 @@ class Bot(commands.Bot):
     async def blue(self, ctx):
         print('blue')
         if self.vote_flag:
-            self.blue_score += 1
+            self.blue_score += self.ADD_SCORE
             self.obs.display_score('blue',self.blue_score)
             
     
