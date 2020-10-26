@@ -2,12 +2,12 @@
     "phase": {
         "1": {
             "red": {
-                "name": "maguro",
+                "name": "nemo",
                 "team": "red",
                 "phase": 1
             },
             "blue": {
-                "name": "nemo",
+                "name": "itzi",
                 "team": "blue",
                 "phase": 1
             }
@@ -20,9 +20,21 @@
                 "phase": 2
             },
             "blue": {
-                "name": "nukome",
+                "name": "suima",
                 "team": "blue",
                 "phase": 2
+            }
+        },
+        "3": {
+            "red": {
+                "name": "maguro",
+                "team": "red",
+                "phase": 3
+            },
+            "blue": {
+                "name": "datcat",
+                "team": "blue",
+                "phase": 3
             }
         }
     }
