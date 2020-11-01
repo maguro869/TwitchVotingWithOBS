@@ -3,13 +3,11 @@ import csv
 
 class Util:
 
-    __fighter_file = open('data/fighter.json')
-    __fighter_json = json.load(__fighter_file)
-    __score_file = open('data/score.csv', mode='a',encoding='utf8')
-    __writer = csv.writer(self.__score_file)
+
 
     def __init__(self):
-        
+        self.__fighter_file = open('data/fighter.json')
+        self.__fighter_json = json.load(self.__fighter_file)
         self.fighter_list = []
         for phase in self.__fighter_json.values():
             for team in phase.values():
@@ -25,18 +23,18 @@ class Util:
 
         for info in reader:
             if info[1] == 'red':
-                red_score += info[3]
+                red_score += int(info[3])
             elif info[1] == 'blue':
-                blue_score += info[3]
+                blue_score += int(info[3])
         read_file.close()
         return [red_score,blue_score]
 
     def save_score(self,phase,red_score,blue_score):
-        red_info = make_score_format(phase,'red',red_score)
-        blue_info = make_score_format(phase,'blue',blue_score)
-        
-        self.__writer.writerow(red_info)
-        self.__writer.writerow(blue_info)
+        red_info = self.make_score_format(phase,'red',red_score)
+        blue_info = self.make_score_format(phase,'blue',blue_score)
+        writer = csv.writer(open('data/score.csv', mode='a',encoding='utf8',newline=""))
+        writer.writerow(red_info)
+        writer.writerow(blue_info)
     
     def get_fighter_info(self,phase,team):
         for fighter in self.fighter_list:
@@ -59,11 +57,10 @@ class Util:
                 return fighter['phase']
 
     def close(self):
-        __fighter_file.close()
-        __score_file.close()
+        self.__fighter_file.close()
 
 
     def make_score_format(self,phase,team,score):
-        return [phase,team,get_fighter_name(phase,team),score]
+        return [phase,team,self.get_fighter_name(phase,team),score]
 
     

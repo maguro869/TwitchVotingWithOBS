@@ -20,11 +20,12 @@ class Bot(commands.Bot):
 
         self.vote_flag = False
         self.red_score_list = []
-        self.blue_scpre_list = []
+        self.blue_score_list = []
         self.red_score = 0
         self.blue_score = 0
         self.phase = 1
         self.ADD_SCORE = 5
+        self.util = Util()
 
     async def initalize(self) -> None:
         print('initalize')
@@ -35,6 +36,8 @@ class Bot(commands.Bot):
     async def result_match(self):
         self.red_score_list.append(self.red_score)
         self.blue_score_list.append(self.blue_score)
+        print(f'redscore_list:{self.red_score_list}')
+        print(f'bluescore_list:{self.blue_score_list}')
 
     async def event_ready(self):
         print(f'ONLINE | {self.nick}')
@@ -68,18 +71,19 @@ class Bot(commands.Bot):
     async def timeup(self, ctx):
         print('timeup')
         if ctx.author.name == MASTER_ID:
-            vote_flag = False
+            self.vote_flag = False
             await self.result_match()
-            Util.save_score(self.phase, self.red_score, self.blue_score)
+            self.util.save_score(self.phase, self.red_score, self.blue_score)
             self.phase += 1
+            print(self.phase)
 
-    @commands.command(name='total'):
+    @commands.command(name='total')
     async def total(self, ctx):
         print('total')
         if ctx.author.name == MASTER_ID:
-            red_total_score, blue_total_score = Util.get_total_score()
-            self.obs.display_score('red',red_score)
-            self.obs.display_score('blue',blue_score)
+            red_total_score, blue_total_score = self.util.get_total_score()
+            self.obs.display_score('red',red_total_score)
+            self.obs.display_score('blue',blue_total_score)
             
     
     @commands.command(name='dc')
