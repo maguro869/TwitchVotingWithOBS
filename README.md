@@ -39,4 +39,4 @@ ONLINE | {bot.nick}
 | !timeup | (master)各ラウンド終了時に実行するコマンド、スコアの確定と保存を行う |
 | !total | (master)現時点の合計得点を出力する |
 | !red or !blue | 各チームに投票するコマンド、readyコマンド後のみ反映される |
-| !dc | (master)OBS,Twitchとの接続を解除する |
+

@@ -86,8 +86,3 @@ class Bot(commands.Bot):
             self.obs.display_score('blue',blue_total_score)
             
     
-    @commands.command(name='dc')
-    async def dc(self, ctx):
-        if ctx.author.name == MASTER_ID:
-            self.obs.disconnect()
-            self.disconnest()

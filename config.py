@@ -12,4 +12,4 @@ BOT_PREFIX = '!'
 CHANNEL = ['twitch_id']
 
 # TwitchVotingWithOBSのパラメータ
-MASTER_ID = 'twitch_id' # botの管理者権限を持つTwitchのアカウントのID
+MASTER_ID = 'master_twitch_id' # botの管理者権限を持つTwitchのアカウントのID(恐らくあなた) 
