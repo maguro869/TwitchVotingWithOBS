@@ -1,5 +1,7 @@
 # TwitchVotingWithOBS
-Twitchコメントによる投票機能 for DJxDJ
+Twitchコメントによる投票機能 for DJxDJ  
+  
+[オンラインDJバトル　DJxDJ アーカイブ](https://www.twitch.tv/videos/826506802)
 
 # Usage🐰
 ## 1. 環境作成
